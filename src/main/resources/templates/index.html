@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot with Navigation</title>
+    <style>
+        /* Styles for the layout */
+        .container {
+            display: flex;
+            flex-direction: row; /* Arrange elements horizontally */
+            height: 100vh; /* Make container full height */
+        }
+
+        .navigation {
+            width: 200px; /* Adjust the width as needed */
+            background-color: #f0f0f0; /* Light gray background */
+            padding: 20px;
+        }
+
+        .messages-container {
+            flex-grow: 1; /* Grow to fill remaining space */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages {
+            flex-grow: 1; /* Grow to fill remaining space */
+            overflow-y: auto; /* Allow vertical scrolling */
+            padding: 20px;
+        }
+
+        .input-container {
+            padding: 20px;
+            border-top: 1px solid #ccc; /* Add a border above the input */
+        }
+
+        /* Styles for the messages */
+        .message {
+            margin-bottom: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Styles for the user's message */
+        .user-message {
+            background-color: #e0e0e0;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="navigation">
+        <!-- Navigation content goes here -->
+        <h2>Navigation</h2>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </div>
+    <div class="messages-container">
+        <div class="messages" id="messages">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        var userInput = document.getElementById('userInput').value;
+        if (userInput.trim() === '') return; // Do nothing if input is empty
+
+        var messagesDiv = document.getElementById('messages');
+        var message = document.createElement('div');
+        message.textContent = userInput;
+        message.classList.add('message', 'user-message');
+        messagesDiv.appendChild(message);
+
+        // Clear input field
+        document.getElementById('userInput').value = '';
+
+        // Simulate bot response (you can replace this with actual response from server)
+        setTimeout(function() {
+            var botMessage = document.createElement('div');
+            botMessage.textContent = 'Bot: Thank you for your message!';
+            botMessage.classList.add('message');
+            messagesDiv.appendChild(botMessage);
+            // Scroll to bottom
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 500);
+    }
+</script>
+</body>
+</html>
