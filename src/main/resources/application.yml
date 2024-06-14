@@ -5,4 +5,4 @@ server:
     key-store-type: JKS
     key-password: Pranaykr0@
 
-port: 8989
+port: 8080
